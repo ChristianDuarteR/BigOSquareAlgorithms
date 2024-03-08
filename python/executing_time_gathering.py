@@ -26,7 +26,8 @@ def take_times(size, samples_by_size):
     samples = []
     samples_seq = []
     for _ in range(samples_by_size):
-        samples.append(data_generator.get_random_list(size)), samples_seq.append(data_generator.get_random_seq(size))
+        samples.append(data_generator.get_random_list(size))
+        samples_seq.append(data_generator.get_random_seq(size))
     return [
         take_time_for_algorithm(samples, algorithms.improved_bubble_sort),
         take_time_for_algorithm(samples, algorithms.shell_sort),
@@ -37,14 +38,16 @@ def take_times(size, samples_by_size):
     Returns the median of the execution time measures for a sorting approach given in 
 """
 
-
 def take_time_for_algorithm(samples_array, sorting_approach):
     times = []
 
     for sample in samples_array:
         start_time = time.time()
-        sorting_approach(sample)
+        if isinstance(sample[0], int):
+            sorting_approach(sample.copy())
+        else:
+            sorting_approach(sample)
         times.append(int(constants.TIME_MULTIPLIER * (time.time() - start_time)))
-
+    # Tomar mediana
     times.sort()
     return times[len(times) // 2]

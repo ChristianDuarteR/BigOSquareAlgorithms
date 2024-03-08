@@ -8,6 +8,8 @@ sequences = [("AGGTAB", "GXTXAYB"), ("ABCBDAB", "BDCAB"), ("XMJYAUZ", "MZJAWXU")
 expected_seq = [4, 4, 4]
 
 
+
+
 class AlgorithmsTests(unittest.TestCase):
     def test_bubble_sort(self):
         for i in range(len(arrays)):
